@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-link to="/list">点我购买折磨张天鸣的工具</router-link>
+    <a href="" @click.prevent="handClick">闪电松鼠？哈哈哈哈哈哈哈哈</a>
     <router-view></router-view>
   </div>
 </template>
@@ -10,6 +10,11 @@ export default {
   data(){
     return{
       msg:"123"
+    }
+  },
+  methods:{
+    handClick(){
+      this.$router.push({name:"list"})
     }
   }
 };

@@ -4,17 +4,17 @@
  Vue.use(VueRouter)
 
     let routes = [
-        {
-            path:"/list",
-            name:"list",
-            component:()=>import(/* webpackChunkName:"list" */ "@/pages/list")
-        },
-        {
-            path:"/details/:id",
-            name:"details",
-            props:true,
-            component:()=>import(/* webpackChunkName:"details" */ "@/pages/details")
-        }
+      {
+        path:"/list",
+        name:"list",
+        component:()=>import(/* webpackChunkName:"list" */ "@/pages/list")
+      },
+      {
+        path:"/detail",
+        name:"detail",
+        props:true,
+        component:()=>import(/* webpackChunkName:"detail" */ "@/pages/detail")
+      }
     ]
 
  let router = new VueRouter({
