@@ -1,21 +1,22 @@
 <template>
   <div id="app">
-    <a href="" @click.prevent="handClick">闪电松鼠？哈哈哈哈哈哈哈哈</a>
-    <router-view></router-view>
+    <shop></shop>
+    <cart></cart>
   </div>
 </template>
 
 <script>
+import shop from "@/components/shop"
+import cart from "@/components/cart"
 export default {
   data(){
     return{
       msg:"123"
     }
   },
-  methods:{
-    handClick(){
-      this.$router.push({name:"list"})
-    }
+  components:{
+    shop,
+    cart
   }
 };
 </script>
