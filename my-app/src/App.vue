@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <shop></shop>
+    <market></market>
     <cart></cart>
   </div>
 </template>
 
 <script>
-import shop from "@/components/shop"
+import market from "@/components/market"
 import cart from "@/components/cart"
 export default {
   data(){
@@ -15,7 +15,7 @@ export default {
     }
   },
   components:{
-    shop,
+    market,
     cart
   }
 };

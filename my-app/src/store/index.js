@@ -1,7 +1,7 @@
 import Vue from "vue"
 import vuex from "vuex"
 import cart from "./cart"
-import product from "./product"
+import market from "./market"
 import createPersistedState from "vuex-persistedstate";
 
 Vue.use(vuex)
@@ -18,15 +18,8 @@ let store = new vuex.Store({
     },
     modules: {
         cart,
-        product
+        market
     },
-        plugins:[
-            createPersistedState({
-                storage:window.sessionStorage,
-                key:"lf-list",
-                paths:["product.list"]
-            })
-        ]
 })
 
 

@@ -1,49 +1,47 @@
- let num = 0
- 
  export default {
     namespaced:true,
     state:{
-      proArr:[]
+        proArr:[]
     },
     getters:{
-      total(state){
-         return state.proArr.reduce((total,item)=>{
-            return total += item.price * item.count
-         },0)
-      }
+        total(state){
+            return (state.proArr.reduce((total,item)=>{
+                return total += item.price * item.count
+            },0))
+        }
     },
     mutations:{
-      ADDPRODUCT(state,payload){
-         let target = state.proArr.find(item=>item.id===payload.id)
-         if(!target){
-            let obj = {
-               title:payload.title,
-               id:payload.id,
-               price:payload.price,
-               count:1
+        // 添加到购物车
+        ADDPRODUCT(state,payload){
+            let target = state.proArr.find(item=>item.id===payload.id)
+            if(target){
+                target.count++
+            }else{
+                let obj = {
+                    title : payload.title,
+                    price : payload.price,
+                    id : payload.id,
+                    count : 1
+                }
+                state.proArr.push(obj)
             }
-            state.proArr.push(obj)
-         }else{
-            target.count++
-         }
-      },
-      SUBCOUNT(state,payload){
-         console.log(payload)
-         let target = state.proArr.find(item=>item.id===payload)
-         if(target){
-            target.count--
-         }
-      }  
+        },
+        SALES(state,payload){
+            let target = state.proArr.find(item=>item.id===payload.id)
+            let res = state.proArr.filter(item=>item.id!==payload.id)
+            console.log(res)
+            if(target){
+                target.count--
+                if(target.count<=0){
+                  state.proArr = state.proArr.filter(item=>item.id!==payload.id)
+                }
+            }
+        }
     },
     actions:{
-      ADD_PRODUCT({commit},payload){
-         commit("ADDPRODUCT",payload)
-         commit("product/SUBTRACT",payload.id,{root:true})
-      },
-      SUB_TRACT({commit},payload){
-         commit("SUBCOUNT",payload.id)
-         commit("product/ADDPRO",payload.id,{root:true})
-      }
-    },
-
+        SALES_PRO({commit},payload){
+            commit("SALES",payload)
+            commit("market/ADDPRODUCT",payload,{root:true})
+        }
+    }
  }
