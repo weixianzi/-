@@ -1,0 +1,12 @@
+*{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+html,body,.box{
+    height: 100%;
+}
+body{
+    background: url(../assets/preview.gif) no-repeat center center;
+    background-size: cover;
+}

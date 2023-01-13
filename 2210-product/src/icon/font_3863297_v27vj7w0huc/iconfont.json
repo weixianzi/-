@@ -1,0 +1,23 @@
+{
+  "id": "3863297",
+  "name": "vue2项目",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "993771",
+      "name": "二维码",
+      "font_class": "erweima",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "15714215",
+      "name": "电脑",
+      "font_class": "diannao",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    }
+  ]
+}
