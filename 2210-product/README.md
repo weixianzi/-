@@ -1,4 +1,4 @@
-# my-app
+# 2210-product
 
 ## Project setup
 ```
