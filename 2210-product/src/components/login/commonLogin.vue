@@ -1,81 +1,65 @@
 <template>
     <div class="box">
         <svg class="icon qrcode" aria-hidden="true">
-            <use xlink:href="#icon-erweima"></use>
-        </svg>
-        <h1 class="title">男同交友系统</h1>
-        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+                <use xlink:href="#icon-erweima"></use>
+            </svg>  
+        <div class="el-form">
+            <h1 class="title">男同交友系统</h1>
             <el-form-item label="账号" prop="userName">
-                <el-input type="userName" v-model="ruleForm.userName" autocomplete="off"></el-input>
+                <el-input type="userName" v-model="loginForm.userName" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="passWord">
-                <el-input type="passWord" v-model="ruleForm.passWord" autocomplete="off"></el-input>
+                <el-input type="passWord" v-model="loginForm.passWord" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="验证码" prop="vCode">
-                <el-input v-model.number="ruleForm.vCode"></el-input>
+                <el-input v-model.number="loginForm.vCode"></el-input>
+                <i v-html="vCode" class="vcode" @click="getVcode"></i>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="submitForm('ruleForm')">登陆</el-button>
+                <el-button type="primary" @click="submitForm('loginForm')">登陆</el-button>
             </el-form-item>
-        </el-form>
-        <a href="" @click.prevent="" class="skip">点我切换短信登录</a>
+            <a href="" @click.prevent="goMsg" class="skip">点我切换短信登录</a>
+        </div>
     </div>
 </template>
 
 <script>
+import * as api from "@/api/login"
 export default {
     data() {
-        var validateVcode = (rule, value, callback) => {
-
-        };
-        var validateUserName = (rule, value, callback) => {
-            let uRule = /^[-_a-zA-Z0-9]{4,16}$/
-            let res = uRule.test(value)
-            if (res) {
-                callback()
-            } else {
-                callback("请正确输入账号")
-            }
-        };
-        var validatePass = (rule, value, callback) => {
-            let pRule = /.{5,8}/
-            let res = pRule.test(value)
-            if (res) {
-                callback()
-            } else {
-                callback("请正确输入密码")
-            }
-        };
         return {
-            ruleForm: {
-                userName: '',
-                passWord: '',
-                vCode: ''
-            },
-            rules: {
-                userName: [
-                    { validator: validateUserName, trigger: 'blur' }
-                ],
-                passWord: [
-                    { validator: validatePass, trigger: 'blur' }
-                ],
-                vCode: [
-                    { validator: validateVcode, trigger: 'blur' }
-                ]
+            vCode: "",
+            loginForm: {
+                userName: "",
+                passWord: "",
+                vCode:""
             }
         };
     },
+    watch:{
+        loginForm:{
+            handler(newVal){
+            console.log(newVal)
+        },
+        deep:true
+        }
+    },
     methods: {
         submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    alert('submit!');
-                } else {
-                    console.log('error submit!!');
-                    return false;
-                }
-            });
+            console.log(formName)
+        },
+        async getVcode() {
+            await api.getVcode()
+                .then(res => {
+                    this.vCode = res.data.img
+                })
+        },
+        goMsg(){
+            console.log(1)
         }
+    },
+    mounted() {
+        this.getVcode()
     }
 }
 </script>
@@ -89,7 +73,7 @@ export default {
 
 .box {
     border: 1px solid;
-    background-color: rgba(#f1582c,80%);
+    background-color: rgba(#f1582c, 80%);
     width: 400px;
     height: 600px;
     position: relative;
@@ -113,15 +97,15 @@ export default {
 .title {
     color: white;
     position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    top: 40px;
+    top: -140px;
+    left: 36%;
+
 }
 
 .skip {
     color: #409eff;
     position: absolute;
-    left: 50%;
+    left: 64%;
     transform: translate(-50%, 0);
     top: 80%;
 }
@@ -133,13 +117,21 @@ export default {
     fill: currentColor;
     overflow: hidden;
 }
-.qrcode{
+
+.qrcode {
     position: absolute;
     left: 360px;
     cursor: pointer;
 }
-.el-form-item__label{
-    color: white;
+
+/deep/ .el-form-item__label {
+    color: white !important;
 }
 
+.vcode {
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
 </style>

@@ -24,13 +24,13 @@ export default {
         var validateVcode = (rule, value, callback) => {
 
         };
-        var validateUserName = (rule, value, callback) => {
-            let uRule = /^[-_a-zA-Z0-9]{4,16}$/
+        var validateTelphone = (rule, value, callback) => {
+            let uRule = /^1[3456789]\d{9}$/
             let res = uRule.test(value)
             if (res) {
                 callback()
             } else {
-                callback("请正确输入账号")
+                callback("请正确输入手机号")
             }
         };
         var validatePass = (rule, value, callback) => {
@@ -50,7 +50,7 @@ export default {
             },
             rules: {
                 telephone: [
-                    { validator: validateUserName, trigger: 'blur' }
+                    { validator: validateTelphone, trigger: 'blur' }
                 ],
                 vCode: [
                     { validator: validatePass, trigger: 'blur' }
