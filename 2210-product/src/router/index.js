@@ -7,6 +7,10 @@ const routes = [
     {
       path:"/",
       component:()=>import(/* webpackChunkName:"login" */ "@/components/login")
+    },
+    {
+      path:"/home",
+      component:()=>import(/* webpackChunkName:"home" */ "@/components/home")
     }
 ];
 

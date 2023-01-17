@@ -17,3 +17,19 @@
       captcha
    }
  })
+
+//  获取二维码
+
+export let getQr = (sid) => http.get("/users/getQrcode",{
+   params:{
+      sid
+   }
+})
+
+// 微信登陆
+
+ export let wechatLogin = (wechatCode) =>http.get("/users/wechatLogin",{
+   params:{
+      wechatCode
+   }
+ })

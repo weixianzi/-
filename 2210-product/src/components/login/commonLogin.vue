@@ -39,14 +39,14 @@ export default {
     watch:{
         loginForm:{
             handler(newVal){
-            console.log(newVal)
+            this.$emit("syncLoginForm",newVal)
         },
         deep:true
         }
     },
     methods: {
         submitForm(formName) {
-            console.log(formName)
+            this.$emit("submit")
         },
         async getVcode() {
             await api.getVcode()

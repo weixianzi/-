@@ -1,8 +1,8 @@
 <template>
     <div class="box">
         <h1 class="title">短信登入</h1>
-        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-            <el-form-item label="手机号" prop="telephone">
+            <div class="el-form">
+                <el-form-item label="手机号" prop="telephone">
                 <a href="" @click.prevent class="vcode">点击获取验证码</a>
                 <el-input type="telephone" v-model="ruleForm.telephone" autocomplete="off">
                 </el-input>
@@ -14,7 +14,7 @@
             <el-form-item>
                 <el-button type="primary" @click="submitForm('ruleForm')">登陆</el-button>
             </el-form-item>
-        </el-form>
+            </div>
     </div>
 </template>
 
