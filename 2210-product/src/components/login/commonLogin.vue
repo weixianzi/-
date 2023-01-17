@@ -1,7 +1,7 @@
 <template>
     <div class="box">
-        <svg class="icon qrcode" aria-hidden="true">
-                <use xlink:href="#icon-erweima"></use>
+            <svg class="icon qrcode" aria-hidden="true" @click="toVcode">
+                <use xlink:href="#icon-erweima" ></use>
             </svg>  
         <div class="el-form">
             <h1 class="title">男同交友系统</h1>
@@ -18,7 +18,7 @@
             <el-form-item>
                 <el-button type="primary" @click="submitForm('loginForm')">登陆</el-button>
             </el-form-item>
-            <a href="" @click.prevent="goMsg" class="skip">点我切换短信登录</a>
+            <a href="" @click.prevent="toMessage" class="skip" @click="toMessage">点我切换短信登录</a>
         </div>
     </div>
 </template>
@@ -54,8 +54,12 @@ export default {
                     this.vCode = res.data.img
                 })
         },
-        goMsg(){
+        toVcode(){
             console.log(1)
+            this.$emit("toVcode","vcode")
+        },
+        toMessage(){
+            this.$emit("toMes","123")
         }
     },
     mounted() {

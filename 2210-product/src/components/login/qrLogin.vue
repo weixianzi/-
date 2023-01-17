@@ -1,14 +1,13 @@
 <template>
     <div class="box">
         <h1 class="title">二维码登入</h1>
-        <svg class="icon" aria-hidden="true" @click="">
+        <svg class="icon" aria-hidden="true" @click="toCommon">
             <use xlink:href="#icon-diannao"></use>
         </svg>
         <div class="qrcode" v-loading="false">
             <img src="" alt="" :src="imgSrc" class="son" :v-if="isShow">
                 <img :src="maskSrc" alt="" class="mask" @click="changeQr">
         </div>
-        <a href="" @click.prevent="" class="skip">点我返回登入界面</a>
     </div>
 </template>
 
@@ -45,9 +44,9 @@ export default {
         io.on("scancodeSuccess",data=>{
             api.wechatLogin(data.wechatCode)
             .then(res=>{
-                console.log(res)
                 this.stroageUserInfo(res.data)
                 this.$router.push("/home")
+                this.maskSrc="https://tse3-mm.cn.bing.net/th/id/OIP-C.pAP9N5voZ4aDRphw-4yR-AAAAA?w=154&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7"
             })
         })
     },
@@ -65,6 +64,9 @@ export default {
         changeQr(){
             this.getQr()
             this.maskSrc= ""
+        },
+        toCommon(){
+            this.$emit("toCommon","common")
         }
     }
 }
@@ -107,13 +109,6 @@ export default {
     position: relative;
 }
 
-.skip {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0%);
-    color: white;
-    top: 350px;
-}
 
 .icon {
     width: 60px;

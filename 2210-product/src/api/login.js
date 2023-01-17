@@ -33,3 +33,15 @@ export let getQr = (sid) => http.get("/users/getQrcode",{
       wechatCode
    }
  })
+
+//  获取验证码
+
+export let getCode = (phoneNumber) => http.post("/sms/send",{
+   phoneNumber
+})
+
+// 手机验证码登入
+
+export let phoneLogin = (code) =>http.post("/users/login?type=sms",{
+   code
+})

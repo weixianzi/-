@@ -2,9 +2,9 @@
     <div>
         <el-form :model="loginForm" status-icon :rules="rules" ref="loginForm" label-width="100px"
             class="demo-ruleForm">
-            <vcode :stroageUserInfo="stroageUserInfo"></vcode>
-            <!-- <message></message> -->
-            <!-- <common ref="commonLogin" @syncLoginForm="changeLoginForm" @submit="submit"></common> -->
+            <vcode :stroageUserInfo="stroageUserInfo" v-if="componType==='vcode'" @toCommon="toCommon"></vcode>
+            <message @toCommon="toCommon" :stroageUserInfo="stroageUserInfo" v-else-if="componType==='message'"></message>
+            <common @toMes="toMes" @toVcode="toVcode" ref="commonLogin" @syncLoginForm="changeLoginForm" @submit="submit" v-else></common>
         </el-form>
     </div>
 </template>
@@ -54,7 +54,8 @@ export default {
                 vCode: [
                     { validator: validateVcode, trigger: 'blur' }
                 ]
-            }
+            },
+            componType:"common"
         }
     },
     components: {
@@ -74,11 +75,9 @@ export default {
                     // 判断验证码
                     await api.verifyVcode(this.loginForm.vCode)
                         .then(async res => {
-                            console.log(res)
                             if (res.data.state) {
                                 await api.commonLog(userName, passWord)
                                     .then(res => {
-                                        console.log(res)
                                         // 判断账号密码
                                         if (res.data.state) {
                                             this.stroageUserInfo(res.data)
@@ -89,26 +88,31 @@ export default {
                             }
                         })
                 } else {
-                    console.log(2)
                     return false;
                 }
             });
         },
-
-
 
         // 同步子父组件数据的方法
         changeLoginForm(newForm) {
             this.loginForm = newForm
         },
 
-
-
-
         stroageUserInfo({ permission, token, userInfo }) {
             stroge.set("lf-token", token)
             stroge.set("lf-per", permission)
             stroge.set("lf-userInfo", userInfo)
+        },
+
+        // 短信登入
+        toVcode(name){
+            this.componType = name
+        },
+        toCommon(){
+            this.componType = "common"
+        },
+        toMes(){
+            this.componType = "message"
         }
     }
 }
