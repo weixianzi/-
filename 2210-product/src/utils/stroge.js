@@ -22,8 +22,13 @@ let get = (key) => {
         return ""
     }
 }
+
+let rm = key =>{
+    localStorage.removeItem(key)
+}
  
 export default {
     set,
-    get
+    get,
+    rm
 }

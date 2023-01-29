@@ -75,12 +75,14 @@ export default {
                     // 判断验证码
                     await api.verifyVcode(this.loginForm.vCode)
                         .then(async res => {
+                            console.log(res)
                             if (res.data.state) {
                                 await api.commonLog(userName, passWord)
                                     .then(res => {
                                         // 判断账号密码
                                         if (res.data.state) {
                                             this.stroageUserInfo(res.data)
+                                            this.$router.push("/    ")
                                         }
                                     })
                             } else {
@@ -99,6 +101,7 @@ export default {
         },
 
         stroageUserInfo({ permission, token, userInfo }) {
+            this.$store.commit("users/GET_USER_INFO",userInfo)
             stroge.set("lf-token", token)
             stroge.set("lf-per", permission)
             stroge.set("lf-userInfo", userInfo)
@@ -117,4 +120,11 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+body{
+    background: url(@/assets/preview.gif) no-repeat center center;
+    background-size: cover;
+}
+</style>
 

@@ -62,7 +62,7 @@ export default {
             await api.phoneLogin(vCode)
             .then(res=>{
                 this.stroageUserInfo(res.data)
-                this.$router.push("/home")
+                this.$router.push("/")
             })
         },
         toCommon(){

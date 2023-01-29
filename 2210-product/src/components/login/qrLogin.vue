@@ -1,10 +1,10 @@
 <template>
     <div class="box">
         <h1 class="title">二维码登入</h1>
-        <svg class="icon" aria-hidden="true" @click="toCommon">
+        <svg class="icon" aria-hidden="show" @click="toCommon">
             <use xlink:href="#icon-diannao"></use>
         </svg>
-        <div class="qrcode" v-loading="false">
+        <div class="qrcode" v-loading="show">
             <img src="" alt="" :src="imgSrc" class="son" :v-if="isShow">
                 <img :src="maskSrc" alt="" class="mask" @click="changeQr">
         </div>
@@ -26,7 +26,8 @@ export default {
         return{
             imgSrc:"",
             isShow:true,
-            maskSrc:""
+            maskSrc:"",
+            show:true
         }
     },
     created() {
@@ -45,7 +46,7 @@ export default {
             api.wechatLogin(data.wechatCode)
             .then(res=>{
                 this.stroageUserInfo(res.data)
-                this.$router.push("/home")
+                this.$router.push("/")
                 this.maskSrc="https://tse3-mm.cn.bing.net/th/id/OIP-C.pAP9N5voZ4aDRphw-4yR-AAAAA?w=154&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7"
             })
         })
@@ -58,6 +59,7 @@ export default {
                     qrcode.toDataURL(res.data.scanCodeUrl)
                     .then(url=>{
                         this.imgSrc=url
+                        this.show = false
                     })
                 })
         },

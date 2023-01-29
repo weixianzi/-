@@ -12,8 +12,10 @@
                 <el-input type="passWord" v-model="loginForm.passWord" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item label="验证码" prop="vCode">
-                <el-input v-model.number="loginForm.vCode"></el-input>
-                <i v-html="vCode" class="vcode" @click="getVcode"></i>
+                <el-input v-model="loginForm.vCode"></el-input>
+                <span class="vcode" v-loading="show">
+                    <i v-html="vCode" @click="getVcode"></i>
+                </span>
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" @click="submitForm('loginForm')">登陆</el-button>
@@ -33,8 +35,9 @@ export default {
                 userName: "",
                 passWord: "",
                 vCode:""
-            }
-        };
+            },
+            show:true
+        }
     },
     watch:{
         loginForm:{
@@ -52,10 +55,10 @@ export default {
             await api.getVcode()
                 .then(res => {
                     this.vCode = res.data.img
+                    this.show = false
                 })
         },
         toVcode(){
-            console.log(1)
             this.$emit("toVcode","vcode")
         },
         toMessage(){
@@ -136,6 +139,7 @@ export default {
     position: absolute;
     right: 0;
     top: 0;
+    height: 40px;
     cursor: pointer;
 }
 </style>
