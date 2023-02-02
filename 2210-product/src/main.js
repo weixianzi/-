@@ -4,7 +4,6 @@ import store from "./store";
 import ElementUI from 'element-ui';
 import qfSubMenu from "qf-sub-menu"
 import App from "./App.vue";
-import "@/global/index.css"
 import "@/global/container.css"
 import 'element-ui/lib/theme-chalk/index.css';
 import "./icon/font_3863297_v27vj7w0huc/iconfont.css"

@@ -21,10 +21,16 @@ const routes = [
   //   path: "/login",
   //   component: () => import(/* webpackChunkName:"login" */ "@/pages/login")
   // },
-  // ...selfRouter
+  // ...selfRouter,
   ...staticRoute,
   dynamicRoute
 ];
+
+let vueRoutePush = VueRouter.prototype.push
+
+VueRouter.prototype.push = function push(to){
+  return vueRoutePush.call(this,to).catch(err=>err)
+}
 
 const router = new VueRouter({
   routes,

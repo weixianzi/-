@@ -15,6 +15,7 @@ import message from "@/components/login/messageLogin.vue"
 import vcode from "@/components/login/qrLogin.vue"
 import * as api from "@/api/login"
 import stroge from "@/utils/stroge"
+import "@/global/bgc.css"
 export default {
     data() {
         var validateVcode = (rule, value, callback) => {
@@ -75,14 +76,13 @@ export default {
                     // 判断验证码
                     await api.verifyVcode(this.loginForm.vCode)
                         .then(async res => {
-                            console.log(res)
                             if (res.data.state) {
                                 await api.commonLog(userName, passWord)
                                     .then(res => {
                                         // 判断账号密码
                                         if (res.data.state) {
                                             this.stroageUserInfo(res.data)
-                                            this.$router.push("/    ")
+                                            this.$router.push("/")
                                         }
                                     })
                             } else {
@@ -121,10 +121,7 @@ export default {
 }
 </script>
 
-<style scoped>
-body{
-    background: url(@/assets/preview.gif) no-repeat center center;
-    background-size: cover;
-}
+<style lang="less" scoped>
+
 </style>
 

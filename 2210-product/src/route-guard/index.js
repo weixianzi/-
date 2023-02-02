@@ -7,7 +7,7 @@ router.beforeEach((to,from,next)=>{
         if(store.state.userPermission.userList.length===0){
                 store.dispatch("userPermission/GETUSERLIST")
                 .then(()=>{
-                    next({path:to.path,replace:true})
+                    next({path:to.path,replace:true,query:to.query})
                 })
         }else{
             next()

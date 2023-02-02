@@ -1,0 +1,4 @@
+body{
+    background: url(@/assets/preview.gif) no-repeat center center;
+    background-size: cover;
+}

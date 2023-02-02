@@ -1,6 +1,8 @@
 <template>
     <el-row type="flex" class="row-bg" justify="space-around">
-  <el-col :span="1"><div class="grid-content bg-purple">1</div></el-col>
+  <el-col :span="1"><div class="grid-content bg-purple" style="font-size:30px; line-height: 50px; font-weight: 900;">
+    <span @click="handClick" v-html="arrows"></span>
+  </div></el-col>
   <el-col :span="12"><h1 class="grid-content bg-purple-light">男同交友系统</h1></el-col>
   <el-col :span="5"><div class="grid-content bg-purple">
     <span>{{ userInfo.nickname }}</span>
@@ -10,17 +12,30 @@
 </template>
 
 <script>
+import bus from "@/api/bus"
 import {mapState} from "vuex"
     export default {
+      data(){
+        return{
+            isShow:false
+        }
+      }, 
         methods:{
           quit(){
             localStorage.removeItem("lf-token")
             this.$router.push("/login")
             location.reload()
+          },
+          handClick(){
+            this.isShow = !this.isShow
+            bus.$emit("showList",this.isShow)
           }
         },
         computed:{
-            ...mapState('users',["userInfo"])
+            ...mapState('users',["userInfo"]),
+            arrows(){
+          return this.isShow ? ">" : "<"
+        }
         }
     }
 </script>
@@ -50,7 +65,6 @@ import {mapState} from "vuex"
   }
   .row-bg {
     padding: 5px 0;
-    background-color: red;
     height: 100%;
     justify-content: space-between;
   }

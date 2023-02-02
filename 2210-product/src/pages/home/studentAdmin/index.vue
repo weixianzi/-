@@ -1,8 +1,5 @@
 <template>
-    <div>
-    学员管理
     <router-view></router-view>
-    </div>
 </template>
 
 <script>

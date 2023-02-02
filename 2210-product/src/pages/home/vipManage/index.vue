@@ -1,6 +1,6 @@
 <template>
     <div>
-    VIP管理
+    <h1 class="top">VIP管理</h1>
     <router-view></router-view>
     </div>
 </template>
@@ -14,3 +14,4 @@
         }
     }
 </script>
+

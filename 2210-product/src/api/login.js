@@ -45,3 +45,4 @@ export let getCode = (phoneNumber) => http.post("/sms/send",{
 export let phoneLogin = (code) =>http.post("/users/login?type=sms",{
    code
 })
+
